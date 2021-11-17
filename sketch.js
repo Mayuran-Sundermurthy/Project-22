@@ -21,30 +21,32 @@ function setup() {
 	}
 
 	var ball_options = {
-		isStatic:true,
-		restitution:0.3
+		isStatic:false,
+		restitution:0.3,
 	}
-
-	
-
 
 	roof = Bodies.rectangle(400,100,230,20,roof_options);
     World.add(world,roof);
-	bob1 = Bodies.circle(314,300,43,ball_options);
+
+	bob1 = Bodies.circle(320,380,20,ball_options);
 	World.add(world,bob1);
-	bob2 = Bodies.circle(357,300,43,ball_options);
+	bob2 = Bodies.circle(360,380,20,ball_options);
 	World.add(world,bob2);
-	bob3 = Bodies.circle(400,300,43,ball_options);
+	bob3 = Bodies.circle(400,300,20,ball_options);
 	World.add(world,bob3);
-	bob4 = Bodies.circle(443,300,43,ball_options);
+	bob4 = Bodies.circle(440,300,20,ball_options);
 	World.add(world,bob4);
-	bob5 = Bodies.circle(486,300,43,ball_options);
+	bob5 = Bodies.circle(480,300,20,ball_options);
 	World.add(world,bob5);
 
-	rope3 = new rope(roof,bob3,400,400);
+	rope1 = new rope(bob1,roof,-80,0);
+	rope2 = new rope(bob2,roof,-40,0);
+	rope3 = new rope(bob3,roof,0,0);
+	rope4 = new rope(bob4,roof,40,0);
+	rope5 = new rope(bob5,roof,80,0);
 	Engine.run(engine);
 	
-  
+
 }
 
 function draw() {
@@ -54,14 +56,24 @@ function draw() {
   rect(roof.position.x,roof.position.y,230,20);
 
   //call display() to show ropes here
+	rope1.display();
+	rope2.display();
 	rope3.display();
+	rope4.display();
+	rope5.display();
   
   //create ellipse shape for multiple bobs here
-	ellipse(bob1.position.x,bob1.position.y,43,43);
-	ellipse(bob2.position.x,bob2.position.y,43,43);
-	ellipse(bob3.position.x,bob3.position.y,43,43);
-	ellipse(bob4.position.x,bob4.position.y,43,43);
-	ellipse(bob5.position.x,bob5.position.y,43,43);
+  ellipse(bob1.position.x,bob1.position.y,46,46);
+  ellipse(bob2.position.x,bob2.position.y,46,46);
+  ellipse(bob3.position.x,bob3.position.y,46,46);
+  ellipse(bob4.position.x,bob4.position.y,46,46);
+  ellipse(bob5.position.x,bob5.position.y,46,46);
 }
 
 //Write keyPressed function and apply force on pressing up_arrow key on the first bob.
+
+function keyPressed(){
+	if(keyCode === UP_ARROW){
+		Matter.Body.applyForce(bob1,bob1.position,{x:-0.08,y:-0.06});
+	}
+}
